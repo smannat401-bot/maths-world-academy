@@ -98,6 +98,7 @@
     html {
       scroll-behavior: smooth;
       font-size: 16px;
+      overflow-x: hidden;
     }
     
     body {
@@ -629,6 +630,7 @@
       transform: rotateY(-8deg) rotateX(4deg);
       transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
       color: var(--text-dark);
+      will-change: transform;
       box-shadow: 0 20px 48px rgba(0,0,0,0.25);
     }
     
@@ -756,7 +758,7 @@
     @media (max-width: 992px) {
       .hero-container {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 32px;
         text-align: center;
       }
       .hero-left {
@@ -768,6 +770,43 @@
       }
       .hero-buttons, .hero-trust-strip {
         justify-content: center;
+      }
+      .hero-right {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .countdown-card {
+        transform: none !important;
+        width: 100%;
+        max-width: 360px;
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero {
+        padding-top: 88px;
+        padding-bottom: 48px;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+      .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      .countdown-card {
+        max-width: 100%;
+        padding: 20px 16px;
+      }
+      .hero-trust-strip {
+        gap: 12px;
+      }
+      .trust-item {
+        font-size: 13px;
       }
     }
     
@@ -5519,7 +5558,7 @@
         const color = Math.random() > 0.65 ? '#F59E0B' : '#FFFFFF';
         
         span.style.cssText = `
-          left: ${Math.random() * 100}%;
+          left: ${Math.random() * 88}%;
           font-size: ${size}px;
           --op: ${opacity};
           color: ${color};
