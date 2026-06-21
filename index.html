@@ -3481,6 +3481,7 @@
         <button class="chalk-tab" id="adminTabInquiries" style="font-size:12px; padding:6px 12px; display:flex; align-items:center; gap:6px;">
           Inbox <span id="adminInboxCount" style="background:var(--secondary); color:var(--white); border-radius:50px; padding:1px 6px; font-size:10px; font-weight:700;">0</span>
         </button>
+        <button class="chalk-tab" id="adminTabCourses" style="font-size:12px; padding:6px 12px;">📚 Course Editor</button>
       </div>
       
       <!-- SECTION 1: GENERAL SETTINGS -->
@@ -3698,6 +3699,86 @@
               </tr>
             </thead>
             <tbody id="adminToppersTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION 9: COURSE EDITOR -->
+      <div class="admin-sec" id="adminSecCourses">
+        <h4 style="color:var(--gold); font-size:15px; margin-bottom:16px;">📚 Course Editor</h4>
+        <input type="hidden" id="adminCourseEditId" value="">
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+          <div>
+            <label for="adminCourseTitle">Course Title*</label>
+            <input type="text" id="adminCourseTitle" class="form-control" placeholder="e.g. Commerce Stream">
+          </div>
+          <div>
+            <label for="adminCourseClass">Class Label*</label>
+            <input type="text" id="adminCourseClass" class="form-control" placeholder="e.g. Class 11–12">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+          <div>
+            <label for="adminCourseCategory">Category (for filter)</label>
+            <select id="adminCourseCategory" class="form-control">
+              <option value="school">Classes 6th–10th (School)</option>
+              <option value="commerce">Class 11–12 Commerce</option>
+              <option value="medical">Class 11–12 Medical (PCB)</option>
+              <option value="nonmed">Class 11–12 Non-Medical (PCM)</option>
+              <option value="other">Other / Special</option>
+            </select>
+          </div>
+          <div>
+            <label for="adminCourseStrip">Card Color Strip</label>
+            <select id="adminCourseStrip" class="form-control">
+              <option value="blue-strip">🔵 Blue</option>
+              <option value="gold-strip">🟡 Gold</option>
+              <option value="green-strip">🟢 Green</option>
+              <option value="purple-strip">🟣 Purple</option>
+              <option value="red-strip">🔴 Red</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label for="adminCourseIcon">Icon Class (Tabler Icons)</label>
+          <input type="text" id="adminCourseIcon" class="form-control" placeholder="e.g. ti-math-function" style="font-family:monospace;">
+          <small style="color:rgba(255,255,255,0.5); font-size:11px;">Browse icons at tabler.io/icons — enter class like ti-book, ti-calculator</small>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label for="adminCoursePills">Subject Pills (comma separated)*</label>
+          <input type="text" id="adminCoursePills" class="form-control" placeholder="e.g. Maths, Science, English, SST">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label for="adminCourseBullets">Key Features (one per line)*</label>
+          <textarea id="adminCourseBullets" class="form-control" rows="3" placeholder="Core Concept Builds&#10;Audio-Visual Sessions&#10;Weekly Mock Quizzes"></textarea>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px;">
+          <button class="btn btn-gold" id="adminSaveCourseBtn" style="height:40px; font-size:13px; color:var(--navy);">➕ Add Course</button>
+          <button class="btn btn-outline-white" id="adminCancelCourseBtn" style="height:40px; font-size:13px; display:none;">✕ Cancel Edit</button>
+        </div>
+
+        <h5 style="color:var(--gold); font-size:13px; margin-bottom:8px;">Current Courses (drag to reorder coming soon)</h5>
+        <div style="overflow-x:auto; max-height:250px; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:6px; background:rgba(0,0,0,0.25);">
+          <table style="width:100%; border-collapse:collapse; text-align:left; font-size:11px; color:var(--white); min-width:450px;">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.2); font-weight:bold; color:var(--gold);">
+                <th style="padding:5px;">#</th>
+                <th style="padding:5px;">Title</th>
+                <th style="padding:5px;">Class</th>
+                <th style="padding:5px;">Category</th>
+                <th style="padding:5px;">Subjects</th>
+                <th style="padding:5px; text-align:center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminCoursesTableBody">
               <!-- Dynamically populated -->
             </tbody>
           </table>
@@ -4239,108 +4320,8 @@
             <span class="gold-bar"></span>
           </div>
           
-          <div class="courses-grid">
-            <!-- Card 1 -->
-            <div class="course-card blue-strip" data-aos="fade-up" data-aos-delay="0">
-              <div class="course-card-content">
-                <div class="course-icon-badge">
-                  <i class="ti ti-ballpen"></i>
-                  <span class="course-class-badge">Class 6–10</span>
-                </div>
-                <h3>All Subjects Prep Block</h3>
-                <div class="course-pills">
-                  <span class="course-pill">Maths</span>
-                  <span class="course-pill">Science</span>
-                  <span class="course-pill">English</span>
-                  <span class="course-pill">SST</span>
-                </div>
-                <ul class="course-bullets">
-                  <li><i class="ti ti-circle-check"></i> Core Concept Builds</li>
-                  <li><i class="ti ti-circle-check"></i> Audio-Visual Sessions</li>
-                  <li><i class="ti ti-circle-check"></i> Weekly Mock Quizzes</li>
-                </ul>
-                <div class="course-card-footer">
-                  <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call Us</a></span>
-                  <a href="#courses" class="btn btn-outline-blue">View Details</a>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Card 2 -->
-            <div class="course-card gold-strip" data-aos="fade-up" data-aos-delay="100">
-              <div class="course-card-content">
-                <div class="course-icon-badge">
-                  <i class="ti ti-chart-arrows"></i>
-                  <span class="course-class-badge">Class 11–12</span>
-                </div>
-                <h3>Commerce Stream</h3>
-                <div class="course-pills">
-                  <span class="course-pill">Accounts</span>
-                  <span class="course-pill">Economics</span>
-                  <span class="course-pill">Maths</span>
-                  <span class="course-pill">B. Studies</span>
-                </div>
-                <ul class="course-bullets">
-                  <li><i class="ti ti-circle-check"></i> In-depth Ledger Accounts</li>
-                  <li><i class="ti ti-circle-check"></i> Practical Case Studies</li>
-                  <li><i class="ti ti-circle-check"></i> Boards Mock Papers</li>
-                </ul>
-                <div class="course-card-footer">
-                  <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call Us</a></span>
-                  <a href="#courses" class="btn btn-outline-blue">View Details</a>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Card 3 -->
-            <div class="course-card green-strip" data-aos="fade-up" data-aos-delay="200">
-              <div class="course-card-content">
-                <div class="course-icon-badge">
-                  <i class="ti ti-dna"></i>
-                  <span class="course-class-badge">Class 11–12</span>
-                </div>
-                <h3>Medical Stream (PCB)</h3>
-                <div class="course-pills">
-                  <span class="course-pill">Physics</span>
-                  <span class="course-pill">Chemistry</span>
-                  <span class="course-pill">Biology</span>
-                </div>
-                <ul class="course-bullets">
-                  <li><i class="ti ti-circle-check"></i> Biology Diagram Classes</li>
-                  <li><i class="ti ti-circle-check"></i> Solved Equation Guides</li>
-                  <li><i class="ti ti-circle-check"></i> Direct Topic Mentoring</li>
-                </ul>
-                <div class="course-card-footer">
-                  <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call Us</a></span>
-                  <a href="#courses" class="btn btn-outline-blue">View Details</a>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Card 4 -->
-            <div class="course-card purple-strip" data-aos="fade-up" data-aos-delay="300">
-              <div class="course-card-content">
-                <div class="course-icon-badge">
-                  <i class="ti ti-math-function"></i>
-                  <span class="course-class-badge">Class 11–12</span>
-                </div>
-                <h3>Non-Medical Stream</h3>
-                <div class="course-pills">
-                  <span class="course-pill">Physics</span>
-                  <span class="course-pill">Chemistry</span>
-                  <span class="course-pill">Maths</span>
-                </div>
-                <ul class="course-bullets">
-                  <li><i class="ti ti-circle-check"></i> Advanced Calculus Drills</li>
-                  <li><i class="ti ti-circle-check"></i> Organic Mechanics Sheet</li>
-                  <li><i class="ti ti-circle-check"></i> CBSE / Board Exam Sets</li>
-                </ul>
-                <div class="course-card-footer">
-                  <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call Us</a></span>
-                  <a href="#courses" class="btn btn-outline-blue">View Details</a>
-                </div>
-              </div>
-            </div>
+          <div class="courses-grid" id="homeCourseGrid">
+            <!-- Dynamically rendered from appState.courses -->
           </div>
           
           <div style="text-align: center;">
@@ -4533,110 +4514,11 @@
             <button class="tab-btn" data-filter="nonmed">Class 11-12 Non-Medical</button>
           </div>
 
-          <!-- Filterable Course Cards List -->
+          <!-- Filterable Course Cards List - rendered dynamically from appState.courses -->
           <div class="courses-grid" id="coursesList">
-            <!-- Card 1 -->
-            <div class="course-card blue-strip" data-category="school">
-              <div class="course-card-content">
-                <div class="course-icon-badge">
-                  <i class="ti ti-backpack"></i>
-                  <span class="course-class-badge">Class 6–10</span>
-                </div>
-                <h3>All Subjects Prep Block</h3>
-                <div class="course-pills">
-                  <span class="course-pill">Maths</span>
-                  <span class="course-pill">Science</span>
-                  <span class="course-pill">English</span>
-                  <span class="course-pill">SST</span>
-                </div>
-                <ul class="course-bullets">
-                  <li><i class="ti ti-circle-check"></i> Core Concept Builds</li>
-                  <li><i class="ti ti-circle-check"></i> Interactive Whiteboards</li>
-                  <li><i class="ti ti-circle-check"></i> Weekly Mock Quizzes</li>
-                </ul>
-                <div class="course-card-footer">
-                  <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call For Fees</a></span>
-                  <button class="btn btn-primary open-enquiry-modal">Enquire Now</button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Card 2 -->
-            <div class="course-card gold-strip" data-category="commerce">
-              <div class="course-card-content">
-                <div class="course-icon-badge">
-                  <i class="ti ti-calculator"></i>
-                  <span class="course-class-badge">Class 11–12</span>
-                </div>
-                <h3>Commerce Stream (Core)</h3>
-                <div class="course-pills">
-                  <span class="course-pill">Accounts</span>
-                  <span class="course-pill">Economics</span>
-                  <span class="course-pill">Maths</span>
-                  <span class="course-pill">B. Studies</span>
-                </div>
-                <ul class="course-bullets">
-                  <li><i class="ti ti-circle-check"></i> Ledger Balances & Auditing</li>
-                  <li><i class="ti ti-circle-check"></i> Applied Economics Drills</li>
-                  <li><i class="ti ti-circle-check"></i> Board Solved Paper Sets</li>
-                </ul>
-                <div class="course-card-footer">
-                  <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call For Fees</a></span>
-                  <button class="btn btn-primary open-enquiry-modal">Enquire Now</button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Card 3 -->
-            <div class="course-card green-strip" data-category="medical">
-              <div class="course-card-content">
-                <div class="course-icon-badge">
-                  <i class="ti ti-microscope"></i>
-                  <span class="course-class-badge">Class 11–12</span>
-                </div>
-                <h3>Medical Stream (PCB)</h3>
-                <div class="course-pills">
-                  <span class="course-pill">Physics</span>
-                  <span class="course-pill">Chemistry</span>
-                  <span class="course-pill">Biology</span>
-                </div>
-                <ul class="course-bullets">
-                  <li><i class="ti ti-circle-check"></i> Scientific Biology Layouts</li>
-                  <li><i class="ti ti-circle-check"></i> Formula Derivation Sheets</li>
-                  <li><i class="ti ti-circle-check"></i> Doubt-Clearing Workshops</li>
-                </ul>
-                <div class="course-card-footer">
-                  <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call For Fees</a></span>
-                  <button class="btn btn-primary open-enquiry-modal">Enquire Now</button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Card 4 -->
-            <div class="course-card purple-strip" data-category="nonmed">
-              <div class="course-card-content">
-                <div class="course-icon-badge">
-                  <i class="ti ti-compass"></i>
-                  <span class="course-class-badge">Class 11–12</span>
-                </div>
-                <h3>Non-Medical Stream (PCM)</h3>
-                <div class="course-pills">
-                  <span class="course-pill">Physics</span>
-                  <span class="course-pill">Chemistry</span>
-                  <span class="course-pill">Maths</span>
-                </div>
-                <ul class="course-bullets">
-                  <li><i class="ti ti-circle-check"></i> Advanced Trigonometry Drills</li>
-                  <li><i class="ti ti-circle-check"></i> Organic Formula Trees</li>
-                  <li><i class="ti ti-circle-check"></i> Target Exam Mock Sets</li>
-                </ul>
-                <div class="course-card-footer">
-                  <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call For Fees</a></span>
-                  <button class="btn btn-primary open-enquiry-modal">Enquire Now</button>
-                </div>
-              </div>
-            </div>
+            <!-- Dynamically populated by renderCoursesPage() -->
           </div>
+
         </div>
       </section>
 
@@ -5467,6 +5349,12 @@
         { name: "Vikramjit Singh", role: "Student (Class 12 PCB)", quote: "Small batch sizes are the biggest advantage. Dr. Priya provides focus to every student, making it highly interactive rather than standard lecture rows.", stars: 5, photo: "👨‍🎓" },
         { name: "Simran Kaur", role: "Student (Class 11 Commerce)", quote: "The accounts and economics coaching here is outstanding. I went from being confused about journal entries to scoring 96% in my pre-boards. Thank you Maths World Academy!", stars: 5, photo: "👩‍🎓" },
         { name: "Ravi Sethi", role: "Parent of Arjun Sethi", quote: "My son's confidence in Mathematics improved drastically after joining Maths World Academy. The weekly tests and personal attention from Rajesh Sir made all the difference.", stars: 5, photo: "👨" }
+      ],
+      courses: [
+        { id: 1, title: "All Subjects Prep Block", classLabel: "Class 6–10", category: "school", icon: "ti-ballpen", strip: "blue-strip", pills: ["Maths", "Science", "English", "SST"], bullets: ["Core Concept Builds", "Audio-Visual Sessions", "Weekly Mock Quizzes"] },
+        { id: 2, title: "Commerce Stream", classLabel: "Class 11–12", category: "commerce", icon: "ti-chart-arrows", strip: "gold-strip", pills: ["Accounts", "Economics", "Maths", "B. Studies"], bullets: ["In-depth Ledger Accounts", "Practical Case Studies", "Boards Mock Papers"] },
+        { id: 3, title: "Medical Stream (PCB)", classLabel: "Class 11–12", category: "medical", icon: "ti-dna", strip: "green-strip", pills: ["Physics", "Chemistry", "Biology"], bullets: ["Biology Diagram Classes", "Solved Equation Guides", "Direct Topic Mentoring"] },
+        { id: 4, title: "Non-Medical Stream (PCM)", classLabel: "Class 11–12", category: "nonmed", icon: "ti-math-function", strip: "purple-strip", pills: ["Physics", "Chemistry", "Maths"], bullets: ["Advanced Calculus Drills", "Organic Mechanics Sheet", "CBSE / Board Exam Sets"] }
       ]
     };
 
@@ -5493,6 +5381,7 @@
     if (!appState.inquiries) appState.inquiries = defaultAppState.inquiries;
     if (!appState.faculty) appState.faculty = defaultAppState.faculty;
     if (!appState.reviews) appState.reviews = defaultAppState.reviews;
+    if (!appState.courses) appState.courses = defaultAppState.courses;
     if (!appState.countdownBatches) appState.countdownBatches = defaultAppState.countdownBatches;
 
     // Helper to persist app state safely
@@ -5689,18 +5578,10 @@
     // 7. Course Filters tab click binding
     const courseTabs = document.querySelectorAll('#courseFilterContainer .tab-btn');
     courseTabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
+      tab.addEventListener('click', () => {
         courseTabs.forEach(t => t.classList.remove('active'));
-        e.target.classList.add('active');
-
-        const filterVal = e.target.getAttribute('data-filter');
-        document.querySelectorAll('#coursesList .course-card').forEach(card => {
-          if (filterVal === 'all' || card.getAttribute('data-category') === filterVal) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+        tab.classList.add('active');
+        renderCoursesPage();
       });
     });
 
@@ -6429,7 +6310,8 @@
       { btn: 'adminTabFaculty', sec: 'adminSecFaculty' },
       { btn: 'adminTabGallery', sec: 'adminSecGallery' },
       { btn: 'adminTabReviews', sec: 'adminSecReviews' },
-      { btn: 'adminTabInquiries', sec: 'adminSecInquiries' }
+      { btn: 'adminTabInquiries', sec: 'adminSecInquiries' },
+      { btn: 'adminTabCourses', sec: 'adminSecCourses' }
     ];
 
     adminTabs.forEach(tab => {
@@ -6497,6 +6379,13 @@
 
       // Toppers List
       renderAdminToppersList();
+
+      // Courses List
+      renderAdminCoursesList();
+
+      // Render courses on pages
+      renderCoursesPreview();
+      renderCoursesPage();
     }
 
     // Quiz Configurator State Managers
@@ -6906,6 +6795,197 @@
       const emojiRadio = document.querySelector('input[name="topperPhotoType"][value="emoji"]');
       if (emojiRadio) { emojiRadio.checked = true; emojiRadio.dispatchEvent(new Event('change')); }
     }
+
+    // ============================================================
+    //   COURSE EDITOR - Full CRUD Logic
+    // ============================================================
+
+    // Render Courses Table in Admin Panel
+    function renderAdminCoursesList() {
+      const tbody = document.getElementById('adminCoursesTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      (appState.courses || []).forEach((c, i) => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid rgba(255,255,255,0.08)';
+        tr.innerHTML = `
+          <td style="padding:5px; color:var(--gold); font-weight:700;">${i + 1}</td>
+          <td style="padding:5px; font-weight:600;">${c.title}</td>
+          <td style="padding:5px;">${c.classLabel}</td>
+          <td style="padding:5px; text-transform:capitalize;">${c.category}</td>
+          <td style="padding:5px; max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${(c.pills || []).join(', ')}</td>
+          <td style="padding:5px; text-align:center; white-space:nowrap;">
+            <button onclick="editCourse(${i})" style="background:var(--blue); color:white; border:none; border-radius:4px; padding:3px 8px; font-size:10px; cursor:pointer; margin-right:4px;">Edit</button>
+            <button onclick="deleteCourse(${i})" style="background:#f43f5e; color:white; border:none; border-radius:4px; padding:3px 8px; font-size:10px; cursor:pointer;">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Save Course (Add or Update)
+    function saveCourse() {
+      const title = document.getElementById('adminCourseTitle').value.trim();
+      const classLabel = document.getElementById('adminCourseClass').value.trim();
+      const category = document.getElementById('adminCourseCategory').value;
+      const strip = document.getElementById('adminCourseStrip').value;
+      const icon = document.getElementById('adminCourseIcon').value.trim() || 'ti-book';
+      const pillsRaw = document.getElementById('adminCoursePills').value.trim();
+      const bulletsRaw = document.getElementById('adminCourseBullets').value.trim();
+      const editId = document.getElementById('adminCourseEditId').value;
+
+      if (!title || !classLabel || !pillsRaw || !bulletsRaw) {
+        showToast('Please fill Title, Class Label, Subject Pills & Key Features.', 'error');
+        return;
+      }
+
+      const pills = pillsRaw.split(',').map(p => p.trim()).filter(Boolean);
+      const bullets = bulletsRaw.split('\n').map(b => b.trim()).filter(Boolean);
+
+      if (editId !== '') {
+        // Update existing
+        const idx = parseInt(editId);
+        appState.courses[idx] = { ...appState.courses[idx], title, classLabel, category, strip, icon, pills, bullets };
+        showToast('Course updated successfully!', 'success');
+      } else {
+        // Add new
+        const newId = Date.now();
+        appState.courses.push({ id: newId, title, classLabel, category, strip, icon, pills, bullets });
+        showToast('New course added!', 'success');
+      }
+
+      saveAppState();
+      clearCourseForm();
+      renderAdminCoursesList();
+      renderCoursesPreview();
+      renderCoursesPage();
+    }
+
+    // Edit Course — populate form
+    window.editCourse = function(idx) {
+      const c = appState.courses[idx];
+      if (!c) return;
+      document.getElementById('adminCourseEditId').value = idx;
+      document.getElementById('adminCourseTitle').value = c.title;
+      document.getElementById('adminCourseClass').value = c.classLabel;
+      document.getElementById('adminCourseCategory').value = c.category;
+      document.getElementById('adminCourseStrip').value = c.strip;
+      document.getElementById('adminCourseIcon').value = c.icon || '';
+      document.getElementById('adminCoursePills').value = (c.pills || []).join(', ');
+      document.getElementById('adminCourseBullets').value = (c.bullets || []).join('\n');
+      const saveBtn = document.getElementById('adminSaveCourseBtn');
+      const cancelBtn = document.getElementById('adminCancelCourseBtn');
+      if (saveBtn) saveBtn.textContent = '💾 Update Course';
+      if (cancelBtn) cancelBtn.style.display = 'block';
+      // Scroll form into view
+      document.getElementById('adminCourseTitle').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+
+    // Delete Course
+    window.deleteCourse = function(idx) {
+      if (!confirm('Delete this course? This cannot be undone.')) return;
+      appState.courses.splice(idx, 1);
+      saveAppState();
+      renderAdminCoursesList();
+      renderCoursesPreview();
+      renderCoursesPage();
+      showToast('Course deleted.', 'success');
+    };
+
+    // Clear Course Form
+    function clearCourseForm() {
+      document.getElementById('adminCourseEditId').value = '';
+      document.getElementById('adminCourseTitle').value = '';
+      document.getElementById('adminCourseClass').value = '';
+      document.getElementById('adminCourseCategory').value = 'school';
+      document.getElementById('adminCourseStrip').value = 'blue-strip';
+      document.getElementById('adminCourseIcon').value = '';
+      document.getElementById('adminCoursePills').value = '';
+      document.getElementById('adminCourseBullets').value = '';
+      const saveBtn = document.getElementById('adminSaveCourseBtn');
+      const cancelBtn = document.getElementById('adminCancelCourseBtn');
+      if (saveBtn) saveBtn.textContent = '➕ Add Course';
+      if (cancelBtn) cancelBtn.style.display = 'none';
+    }
+
+    // Wire up Save & Cancel buttons
+    const adminSaveCourseBtn = document.getElementById('adminSaveCourseBtn');
+    if (adminSaveCourseBtn) adminSaveCourseBtn.addEventListener('click', saveCourse);
+    const adminCancelCourseBtn = document.getElementById('adminCancelCourseBtn');
+    if (adminCancelCourseBtn) adminCancelCourseBtn.addEventListener('click', clearCourseForm);
+
+    // ============================================================
+    //   renderCoursesPreview — Homepage Course Cards (dynamic)
+    // ============================================================
+    function renderCoursesPreview() {
+      const grid = document.getElementById('homeCourseGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      const previewCourses = (appState.courses || []).slice(0, 4);
+      previewCourses.forEach((c, i) => {
+        const card = document.createElement('div');
+        card.className = `course-card ${c.strip}`;
+        card.setAttribute('data-aos', 'fade-up');
+        card.setAttribute('data-aos-delay', String(i * 100));
+        const pillsHTML = (c.pills || []).map(p => `<span class="course-pill">${p}</span>`).join('');
+        const bulletsHTML = (c.bullets || []).map(b => `<li><i class="ti ti-circle-check"></i> ${b}</li>`).join('');
+        card.innerHTML = `
+          <div class="course-card-content">
+            <div class="course-icon-badge">
+              <i class="ti ${c.icon || 'ti-book'}"></i>
+              <span class="course-class-badge">${c.classLabel}</span>
+            </div>
+            <h3>${c.title}</h3>
+            <div class="course-pills">${pillsHTML}</div>
+            <ul class="course-bullets">${bulletsHTML}</ul>
+            <div class="course-card-footer">
+              <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call Us</a></span>
+              <a href="#courses" class="btn btn-outline-blue">View Details</a>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // ============================================================
+    //   renderCoursesPage — Full Courses Page (dynamic)
+    // ============================================================
+    function renderCoursesPage() {
+      const list = document.getElementById('coursesList');
+      if (!list) return;
+      const activeFilter = document.querySelector('#courseFilterContainer .tab-btn.active');
+      const filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+      list.innerHTML = '';
+      (appState.courses || []).forEach(c => {
+        if (filter !== 'all' && c.category !== filter) return;
+        const card = document.createElement('div');
+        card.className = `course-card ${c.strip}`;
+        card.setAttribute('data-category', c.category);
+        const pillsHTML = (c.pills || []).map(p => `<span class="course-pill">${p}</span>`).join('');
+        const bulletsHTML = (c.bullets || []).map(b => `<li><i class="ti ti-circle-check"></i> ${b}</li>`).join('');
+        card.innerHTML = `
+          <div class="course-card-content">
+            <div class="course-icon-badge">
+              <i class="ti ${c.icon || 'ti-book'}"></i>
+              <span class="course-class-badge">${c.classLabel}</span>
+            </div>
+            <h3>${c.title}</h3>
+            <div class="course-pills">${pillsHTML}</div>
+            <ul class="course-bullets">${bulletsHTML}</ul>
+            <div class="course-card-footer">
+              <span class="course-fee-line">Fee: <a href="tel:+919988251863">Call For Fees</a></span>
+              <button class="btn btn-primary open-enquiry-modal">Enquire Now</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    // Initial render of courses on page load
+    renderCoursesPreview();
+    renderCoursesPage();
 
     // Add/Update Topper Profile
     if (adminAddTopper) {
